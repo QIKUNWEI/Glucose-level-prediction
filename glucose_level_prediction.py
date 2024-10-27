@@ -174,8 +174,8 @@ def predict_next_48_hours(file_path, model=None, sequence_length=12):
 
 
 if __name__ == "__main__":
-    new_patient_file = '/Users/qikunwei/PycharmProjects/DDLS_Final_project/591-ws-testing.xml'
-    trained_model = load_model('/Users/qikunwei/PycharmProjects/DDLS_Final_project/glucose_model_trained.h5')
+    new_patient_file = 'path to the test file'
+    trained_model = load_model('path to trained h5 model file')
 
     df_recorded, predicted_glucose, prediction_times = predict_next_48_hours(new_patient_file, model=trained_model)
 
