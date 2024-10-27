@@ -19,9 +19,9 @@ The model uses the publicly available OhioT1DM dataset. For access, visit [Kaggl
 
 1. Clone the repository.
 
-2. Run glucose_level_prediction.py to train the model.
+2. Run glucose_level_prediction_model_training.py to train the model.
   
-3. Use glucose_level_prediction_model_training.py for prediction and visualization of results.
+3. Use glucose_level_prediction.py for prediction and visualization of results.
 
 **License**
 
