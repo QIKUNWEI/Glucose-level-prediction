@@ -139,7 +139,7 @@ def train_model(file_path, sequence_length=12, test_size=0.2):
     return model, scaler, X_test, y_test, history
 
 if __name__ == "__main__":
-    train_file_path = '559-ws-training.xml'
+    train_file_path = 'path to training set'
     model, scaler, X_test, y_test, history = train_model(train_file_path)
 
     # Plot training metrics
