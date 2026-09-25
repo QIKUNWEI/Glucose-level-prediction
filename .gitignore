@@ -1,0 +1,13 @@
+__pycache__/
+*.pyc
+.pytest_cache/
+.idea/
+# Trained models and outputs
+artifacts/
+*.keras
+*.h5
+*.csv
+*.png
+# OhioT1DM data is distributed under a data use agreement; never commit it.
+data/
+*.xml
