@@ -18,7 +18,25 @@ This repository forecasts blood glucose 5–60 minutes ahead for people with typ
 
 **Results (patient 559, OhioT1DM test file, 10 days)**
 
-Benchmark numbers will be added here once the evaluation runs finish.
+All models were scored on the same forecast times (2242 at 30 min, 2183 at 60 min). RMSE and MAE are in mg/dL. "EGA A" is the share of forecasts in Clarke error grid zone A. "Hypo sens/prec" are the sensitivity and precision of a < 70 mg/dL alert.
+
+| Model | Horizon | RMSE | MAE | MARD % | EGA A % | Hypo sens | Hypo prec |
+|---|---|---|---|---|---|---|---|
+| Persistence (future = current value) | 30 min | 23.17 | 16.62 | 10.42 | 86.5 | 0.76 | 0.74 |
+| Previous version of this repository¹ | 30 min | 20.79 | 14.57 | 9.86 | 87.9 | 0.00 | – |
+| Ridge ARX, same features | 30 min | 18.45 | 13.32 | 8.69 | 91.8 | 0.74 | 0.72 |
+| **GRU ensemble (patient 559 only)** | 30 min | **17.87** | **12.39** | **7.85** | **92.4** | **0.83** | **0.79** |
+| GRU ensemble + 5 other patients² | 30 min | 17.31 | 12.12 | 7.64 | 93.1 | 0.86 | 0.83 |
+| Persistence | 60 min | 39.13 | 28.73 | 18.05 | 67.8 | 0.55 | 0.49 |
+| Previous version of this repository¹ | 60 min | 38.35 | 28.41 | 18.37 | 68.2 | 0.00 | – |
+| Ridge ARX, same features | 60 min | 31.18 | 23.38 | 15.54 | 73.9 | 0.11 | 0.41 |
+| **GRU ensemble (patient 559 only)** | 60 min | **29.69** | **21.20** | **13.45** | **79.8** | **0.45** | **0.67** |
+| GRU ensemble + 5 other patients² | 60 min | 29.24 | 21.27 | 13.45 | 78.4 | 0.44 | 0.68 |
+
+¹ The previous parser and BiLSTM, with the target moved to 30/60 min so the numbers are comparable (the original only predicted 5 min ahead). It was trained as before, with a random split and MinMax scaling fitted on all data. Its parser found no meal, insulin or exercise values, so it used glucose only. It never predicted a value below 70 mg/dL, so it caught none of the hypoglycaemic readings.
+² Adds the testing files of patients 563, 570, 575, 588 and 591 as training data only (`--extra-train`).
+
+These numbers come from a single patient over 10 days, so differences of a few tenths of a mg/dL are within run-to-run noise.
 
 **Dataset**
 

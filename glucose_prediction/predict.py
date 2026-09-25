@@ -70,6 +70,7 @@ def plot_forecast(df: pd.DataFrame, recorded: pd.Series, path=None, days: float 
     rec = recorded[(recorded.index >= begin)]
     track = df.loc[df.index >= begin, f"pred_{horizon_min}min"]
     track.index = track.index + pd.Timedelta(minutes=horizon_min)  # plot at the time it refers to
+    track = track.asfreq(f"{STEP_MINUTES}min")  # NaN at missing forecasts so gaps are not bridged
 
     fig, ax = plt.subplots(figsize=(13, 6))
     ax.axhspan(0, HYPO_THRESHOLD, color="#7b3294", alpha=0.08, label=f"hypoglycaemia (< {HYPO_THRESHOLD:.0f})")
